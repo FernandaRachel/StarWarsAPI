@@ -5,8 +5,9 @@ using System.Threading.Tasks;
 
 namespace StarWarsApi.Models
 {
-    public interface Response
+    public class Response<T>
     {
+
         public int count { get; set; }
         public string next { get; set; }
         public object previous { get; set; }

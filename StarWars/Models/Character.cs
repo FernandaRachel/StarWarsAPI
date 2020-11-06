@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace StarWars.Models
+namespace StarWarsApi.Models
 {
     public class Character
     {

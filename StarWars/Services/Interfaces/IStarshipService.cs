@@ -5,12 +5,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace StarWarsApi.Clients.Interfaces
+namespace StarWarsApi.Services
 {
-    public interface IStarshipClient
+    public interface IStarshipService
     {
         Task<Response<Starship>> GetAllStarshipAsync<Starship>();
         Task<Starship> GetStarshipByIdAsync(int id);
-        Task<Response<Starship>> GetStarshipByNameAsync<Starship>(string name);
+        Task<Response<Starship>> GetStarshipByNameAsync(string name);
     }
 }

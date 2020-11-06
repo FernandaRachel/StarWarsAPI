@@ -1,18 +1,19 @@
 ﻿using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using StarWars.Clients.Interfaces;
-using StarWars.Controllers;
-using StarWars.Models;
-using StarWars.Settings;
+using StarWarsApi.Clients.Interfaces;
+using StarWarsApi.Controllers;
+using StarWarsApi.Models;
+using StarWarsApi.Settings;
+using StarWarsApi.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace StarWars.Clients
+namespace StarWarsApi.Clients
 {
-    public class StarshipClient : ICharacterClient
+    public class StarshipClient : IStarshipClient
     {
         private readonly ILogger<StarshipClient> _logger;
         public HttpClient _httpClient{ get; set; }
@@ -24,16 +25,16 @@ namespace StarWars.Clients
             httpClient.BaseAddress = new Uri(_starWarsSettings.Value.Url);
         }
        
-        public async Task<IEnumerable<Character>> GetAllCharacterAsync()
+        public async Task<Response<T>> GetAllStarshipAsync<T>()
         {
-            var url = $"people/";
+            var url = $"starships/";
 
             try
             {
                 var response = await _httpClient.GetAsync(url);
 
                 if (response.IsSuccessStatusCode)
-                    return await response.Content.ReadAsAsync<IEnumerable<Character>>();
+                    return await response.Content.ReadAsAsync<Response<T>>();
             }
             catch (Exception ex)
             {
@@ -43,16 +44,35 @@ namespace StarWars.Clients
             return null;
         }
 
-        public async Task<Character> GetCharacterAsync(string id)
+        public async Task<Response<Starship>> GetStarshipByNameAsync<Starship>(string name)
         {
-            var url = $"people/{id}/";
+            var url = $"starships/?search={name}";
 
             try
             {
                 var response = await _httpClient.GetAsync(url);
 
                 if (response.IsSuccessStatusCode)
-                    return await response.Content.ReadAsAsync<Character>();
+                    return await response.Content.ReadAsAsync<Response<Starship>>();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+            }
+
+            return null;
+        }
+
+        public async Task<Starship> GetStarshipByIdAsync(int id)
+        {
+            var url = $"starships/{id}/";
+
+            try
+            {
+                var response = await _httpClient.GetAsync(url);
+
+                if (response.IsSuccessStatusCode)
+                    return await response.Content.ReadAsAsync<Starship>();
             }
             catch (Exception ex)
             {

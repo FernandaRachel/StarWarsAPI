@@ -17,7 +17,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "StarWars": {
+    "StarWarsApi": {
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "character",

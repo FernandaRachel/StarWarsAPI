@@ -13,21 +13,21 @@ using System.Threading.Tasks;
 
 namespace StarWarsApi.Clients
 {
-    public class CharacterClient : ICharacterClient
+    public class PlanetClient : IPlanetClient
     {
-        private readonly ILogger<CharacterClient> _logger;
+        private readonly ILogger<PlanetClient> _logger;
         public HttpClient _httpClient{ get; set; }
 
-        public CharacterClient(HttpClient httpClient, IOptions<StarWarSettings> _starWarsSettings, ILogger<CharacterClient> logger)
+        public PlanetClient(HttpClient httpClient, IOptions<StarWarSettings> _starWarsSettings, ILogger<PlanetClient> logger)
         {
             _httpClient = httpClient;
             _logger = logger;
             httpClient.BaseAddress = new Uri(_starWarsSettings.Value.Url);
         }
        
-        public async Task<Response<T>> GetAllCharacterAsync<T>()
+        public async Task<Response<T>> GetAllPlanetsAsync<T>()
         {
-            var url = $"people/";
+            var url = $"planets/";
 
             try
             {
@@ -44,16 +44,16 @@ namespace StarWarsApi.Clients
             return null;
         }
 
-        public async Task<Character> GetCharacterByIdAsync(int id)
+        public async Task<Planet> GetPlanetByIdAsync(int id)
         {
-            var url = $"people/{id}/";
+            var url = $"planets/{id}/";
 
             try
             {
                 var response = await _httpClient.GetAsync(url);
 
                 if (response.IsSuccessStatusCode)
-                    return await response.Content.ReadAsAsync<Character>();
+                    return await response.Content.ReadAsAsync<Planet>();
             }
             catch (Exception ex)
             {
@@ -63,16 +63,16 @@ namespace StarWarsApi.Clients
             return null;
         }
 
-        public async Task<Response<Character>> GetCharacterByNameAsync<Character>(string name)
+        public async Task<Response<Planet>> GetPlanetByNameAsync<Planet>(string name)
         {
-            var url = $"people/?search={name}";
+            var url = $"planets/?search={name}";
 
             try
             {
                 var response = await _httpClient.GetAsync(url);
 
                 if (response.IsSuccessStatusCode)
-                    return await response.Content.ReadAsAsync<Response<Character>>();
+                    return await response.Content.ReadAsAsync<Response<Planet>>();
             }
             catch (Exception ex)
             {

@@ -7,16 +7,16 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS build
 WORKDIR /src
-COPY ["StarWars/StarWars.csproj", "StarWars/"]
-RUN dotnet restore "StarWars/StarWars.csproj"
+COPY ["StarWarsApi/StarWarsApi.csproj", "StarWarsApi/"]
+RUN dotnet restore "StarWarsApi/StarWarsApi.csproj"
 COPY . .
-WORKDIR "/src/StarWars"
-RUN dotnet build "StarWars.csproj" -c Release -o /app/build
+WORKDIR "/src/StarWarsApi"
+RUN dotnet build "StarWarsApi.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "StarWars.csproj" -c Release -o /app/publish
+RUN dotnet publish "StarWarsApi.csproj" -c Release -o /app/publish
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "StarWars.dll"]
+ENTRYPOINT ["dotnet", "StarWarsApi.dll"]

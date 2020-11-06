@@ -5,10 +5,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using StarWars.Models;
-using StarWars.Services;
+using StarWarsApi.Models;
+using StarWarsApi.Services;
 
-namespace StarWars.Controllers
+namespace StarWarsApi.Controllers
 {
     [ApiController]
     [Route("[controller]")]
@@ -27,16 +27,16 @@ namespace StarWars.Controllers
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            var response = await _characterService.GetAllCharacterAsync();
+            var response = await _characterService.GetAllCharacterAsync<Character>();
             if (response is null)
                 return Ok("Não encontrado");
             return Ok(response);
         }
 
-        [HttpGet("{id}")]
-        public async Task<IActionResult> Get(string id)
+        [HttpGet("{name}")]
+        public async Task<IActionResult> Get(string name)
         {
-            var response = await _characterService.GetCharacterAsync(id);
+            var response = await _characterService.GetCharacterByNameAsync(name);
             if (response is null)
                 return Ok("Não encontrado");
             return Ok(response);

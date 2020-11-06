@@ -1,14 +1,16 @@
-﻿using StarWars.Models;
+﻿using StarWarsApi.Models;
+using StarWarsApi.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace StarWars.Clients.Interfaces
+namespace StarWarsApi.Clients.Interfaces
 {
-    public interface IStarshipClient
+    public interface ICharacterClient
     {
-        Task<IEnumerable<Startship>> GetAllStarshipAsync();
-        Task<Startship> GetStarshipAsync(string id);
+        Task<Response<T>> GetAllCharacterAsync<T>();
+        Task<Character> GetCharacterByIdAsync(int id);
+        Task<Response<Character>> GetCharacterByNameAsync<Character>(string name);
     }
 }
