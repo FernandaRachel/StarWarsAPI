@@ -16,6 +16,7 @@ using StarWarsApi.Clients.Interfaces;
 using StarWarsApi.Infra.Repositories;
 using StarWarsApi.Infra.Repositories.Interfaces;
 using StarWarsApi.Infra.Services;
+using StarWarsApi.Infra.Services.Interfaces;
 using StarWarsApi.Services;
 using StarWarsApi.Settings;
 
@@ -40,7 +41,7 @@ namespace StarWarsApi
             services.Configure<StarWarSettings>(Configuration.GetSection("StarWarSettings"));
             // MongoDb Configuration
             services.Configure<SearchDatabaseSettings>(Configuration.GetSection("SearchDatabaseSettings"));
-            services.AddSingleton<SearchDatabaseSettings>(sp => sp.GetRequiredService<IOptions<SearchDatabaseSettings>>().Value);
+            //services.AddSingleton<SearchDatabaseSettings>(sp => sp.GetRequiredService<IOptions<SearchDatabaseSettings>>().Value);
 
             services.AddHttpClient<ICharacterClient, CharacterClient>();
             services.AddHttpClient<IPlanetClient, PlanetClient>();
@@ -51,7 +52,8 @@ namespace StarWarsApi
             services.AddSingleton<IPlanetService, PlanetService>();
             services.AddSingleton<IStarshipService, StarshipService>();
             services.AddSingleton<IFilmService, FilmService>();
-            services.AddSingleton<SearchService>();
+            services.AddSingleton<ISearchService, SearchService>();
+            services.AddSingleton<ISearchDatabaseSettings, SearchDatabaseSettings>();
         }
 
 

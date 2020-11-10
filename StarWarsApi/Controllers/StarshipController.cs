@@ -5,22 +5,25 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using StarWarsApi.Infra.Repositories.Models;
+using StarWarsApi.Infra.Services.Interfaces;
 using StarWarsApi.Models;
 using StarWarsApi.Services;
 
 namespace StarWarsApi.Controllers
 {
-    [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class StarshipController : ControllerBase
     {
         private readonly ILogger<CharacterController> _logger;
         private readonly IStarshipService _starshipService;
+        private readonly ISearchService _searchService;
 
-        public StarshipController(ILogger<CharacterController> logger, IStarshipService starshipService)
+        public StarshipController(ILogger<CharacterController> logger, IStarshipService starshipService, ISearchService searchService)
         {
             _logger = logger;
             _starshipService = starshipService;
+            _searchService = searchService;
         }
 
 
@@ -36,6 +39,9 @@ namespace StarWarsApi.Controllers
         [HttpGet("{name}")]
         public async Task<IActionResult> Get(string name)
         {
+            Search search = new Search() { CreateDate = DateTime.Now, SearchTerm = name, SearchType = ESearchType.Character };
+            await _searchService.CreateAsync(search);
+
             var response = await _starshipService.GetStarshipByNameAsync(name);
             if (response is null)
                 return Ok("Não encontrado");

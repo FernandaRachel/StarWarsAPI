@@ -1,7 +1,6 @@
 ﻿using StarWarsApi.Clients;
 using StarWarsApi.Clients.Interfaces;
 using StarWarsApi.Models;
-using StarWarsApi.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;

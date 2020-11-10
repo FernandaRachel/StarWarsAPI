@@ -1,5 +1,6 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
+using StarWarsApi.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +14,7 @@ namespace StarWarsApi.Infra.Repositories.Models
         [BsonRepresentation(BsonType.ObjectId)]
         public string Id { get; set; }
         public string SearchTerm{ get; set; }
-        public string SearchType { get; set; }
+        public ESearchType SearchType { get; set; }
         public DateTime CreateDate { get; set; }
     }
 }
