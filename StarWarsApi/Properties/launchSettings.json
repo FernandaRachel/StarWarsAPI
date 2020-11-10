@@ -12,7 +12,7 @@
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
-      "launchUrl": "character",
+      "launchUrl": "api/character",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
@@ -20,7 +20,7 @@
     "StarWarsApi": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "character",
+      "launchUrl": "api/character",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
@@ -29,7 +29,7 @@
     "Docker": {
       "commandName": "Docker",
       "launchBrowser": true,
-      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}/character",
+      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}/api/character",
       "publishAllPorts": true,
       "useSSL": true
     }

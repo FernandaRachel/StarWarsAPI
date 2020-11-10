@@ -5,20 +5,19 @@
     <UserSecretsId>eca8c9eb-02b4-4bc0-8e2b-ce82f2975f68</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <Platforms>AnyCPU;x64</Platforms>
+    <DockerComposeProjectPath>..\docker-compose.dcproj</DockerComposeProjectPath>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="DnsClient" Version="1.3.2" />
     <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.7" />
     <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Abstractions" Version="2.2.0" />
-    <PackageReference Include="Microsoft.Net.Http" Version="2.2.29" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.9" />
+    <PackageReference Include="MongoDB.Bson" Version="2.11.4" />
     <PackageReference Include="MongoDB.Driver" Version="2.11.4" />
+    <PackageReference Include="MongoDB.Driver.Core" Version="2.11.4" />
     <PackageReference Include="System.Net.Http" Version="4.3.4" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Tests\" />
   </ItemGroup>
 
 
