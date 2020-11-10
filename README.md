@@ -280,7 +280,7 @@ StarWarsApi is an web API that search characters and 3 others similar characters
 
 #### Request
 
-`GET api/character/:name`
+`GET api/character/Luke`
 
 ### Response
 
