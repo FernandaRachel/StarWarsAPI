@@ -7,7 +7,7 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS build
 WORKDIR /src
-COPY ["StarWarsApi/StarWarsApi.csproj", "StarWarsApi/"]
+COPY ["", "StarWarsApi/"]
 RUN dotnet restore "StarWarsApi/StarWarsApi.csproj"
 COPY . .
 WORKDIR "/src/StarWarsApi"
@@ -19,5 +19,7 @@ RUN dotnet publish "StarWarsApi.csproj" -c Release -o /app/publish
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
+ENV ASPNETCORE_ENVIRONMENT=Development
+ENV ASPNETCORE_URLS=http://*:80
 ENTRYPOINT ["dotnet", "StarWarsApi.dll"]
 
