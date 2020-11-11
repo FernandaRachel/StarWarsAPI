@@ -1,24 +1,22 @@
 # StarWarsApi
 
-#### Build local without Docker you are going need:
+#### Build local without Docker you are going to need:
 - Mongo installed
-- Change mongo port to 27017 in appsettings
+- Change mongo host to localhost in appsettings
 - Update user and password in appsettings
 - Set StarWarsApi as Startup Project
 - Play/Start application selecting StarWarsApi
 
 #### Build local using Docker:
 - Select docker-compose as Startup Project
-- Change mongo port to 27018 in appsettings
 - Play/Start application
-
-OBS: Issues building using docker, not being able to connect to Mongo
 
 StarWarsApi is an web API that search characters and 3 others similar characters and search starships.
 
   - `api/character`
   - `api/character/:name`
   - `api/starship`
+  - `api/searchterm`
 
 ## Get All Characters List
  `GET api/character`
@@ -405,3 +403,15 @@ StarWarsApi is an web API that search characters and 3 others similar characters
             }
         ]
     }]
+    
+#### Request
+`GET api/searchterm`
+
+### Response
+
+    [
+        {
+            "searchTerm": "LUKE",
+            "qtdSearch ": 1
+        }
+    ]
